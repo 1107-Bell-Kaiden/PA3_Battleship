@@ -37,13 +37,7 @@ class Player {
         //
         void setTurn(bool);
 
-        void setName(string)
-
-
-
-
-
-
-
+        void setName(string);
 };
+
 #endif

@@ -5,7 +5,6 @@ Boat::Boat(){
     boatBack = 0;
 }
 
-
 Boat::Boat(int f, int b){
     boatFront = f;
     boatBack = b;

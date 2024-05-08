@@ -1,11 +1,11 @@
-#indef BOAT_H
+#ifndef BOAT_H
 #define BOAT_H
 
-#include <stdio.h>
+#include <iostream>
 using namespace std;
 
 
-Class Boat {
+class Boat {
     int boatFront;
     int boatBack;
 
@@ -25,6 +25,6 @@ Class Boat {
         bool isSunk();
 
         Boat& operator =(const Boat& rhs); 
-}
+};
 
 #endif
