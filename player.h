@@ -1,9 +1,9 @@
-#indef PLAYER_H
+#ifndef PLAYER_H
 #define PLAYER_H
 
 #include "boat.h"
 
-Class Player {
+class Player {
     string player1_board;
     string opponent_board;
     Boat* ships;
@@ -45,4 +45,5 @@ Class Player {
 
 
 
-}
+};
+#endif
