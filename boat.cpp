@@ -16,7 +16,7 @@ Boat::Boat(const Boat& rhs){
 }
 
 Boat::~Boat(){
-//    delete [] boat;
+
 }
 
 int Boat::getBoatFront(){

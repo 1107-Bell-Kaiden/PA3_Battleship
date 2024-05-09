@@ -47,15 +47,37 @@ Player::Player(const Player& rhs){
 Player::~Player(){
     delete[] ships;
 }
+
+Player& Player::operator=(const Player& rhs){
+    numShips = rhs.numShips;
+    maxShips = rhs.maxShips;
+
+    player1_board = rhs.player1_board;
+    opponent_board = rhs.opponent_board;
+    ships = new Boat[maxShips];
+
+    for (int i = 0; i < numShips; i++) {
+        ships[i] = rhs.ships[i];
+    }
+
+    turn = rhs.turn;
+    name = rhs.name;
+    
+    return *this;
+}
+
 string Player::getPlayer1_Board(){
     return player1_board;
 }
+
 string Player::getOpponent_Board(){
     return opponent_board;
 }
+
 Boat* Player::getShips(){
     return ships;
 }
+
 bool Player::getTurn(){
     return turn;
 }

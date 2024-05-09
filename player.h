@@ -7,7 +7,7 @@ class Player {
     protected:
         string player1_board;
         string opponent_board;
-        Boat* ships;
+        Boat* ships; //would we make this a dynamicArray?
         bool turn;
         string name;
 
@@ -21,7 +21,7 @@ class Player {
         Player(const Player&);
 
         ~Player();
-        Player& operator=(const Player& rhs);
+        Player& operator=(const Player&);
 
         // Getters
         string getPlayer1_Board();
