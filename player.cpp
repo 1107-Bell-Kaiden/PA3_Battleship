@@ -64,7 +64,6 @@ string Player::getName(){
     return name;
 }
 
-// Setters
 void Player::setPlayer1_Board(string pb){
     player1_board = pb;
 }

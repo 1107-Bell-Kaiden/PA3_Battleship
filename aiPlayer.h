@@ -8,7 +8,7 @@
 class AiPlayer : public Player{
     public:
         void placeShipsRandom();
-        //void takeTurn();
+        //void takeTurn(); ?
 };
 
 #endif
