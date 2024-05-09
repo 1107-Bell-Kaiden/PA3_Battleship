@@ -4,15 +4,16 @@
 #include "boat.h"
 
 class Player {
-    string player1_board;
-    string opponent_board;
-    Boat* ships;
-    bool turn;
-    string name;
+    protected:
+        string player1_board;
+        string opponent_board;
+        Boat* ships;
+        bool turn;
+        string name;
 
-    //idk if we have to dynamically allocate ships or not.
-    int numShips;
-    int maxShips;
+        //idk if we have to dynamically allocate ships or not.
+        int numShips;
+        int maxShips;
 
     public:
         Player();
@@ -20,24 +21,29 @@ class Player {
         Player(const Player&);
 
         ~Player();
+        Player& operator=(const Player& rhs);
 
         // Getters
         string getPlayer1_Board();
         string getOpponent_Board();
         Boat* getShips();
         bool getTurn();
-
         string getName();
 
         // Setters
         void setPlayer1_Board(string);
         void setOpponent_Board(string);
-
-        // void setShips(Boat);
-        //
         void setTurn(bool);
-
         void setName(string);
+
+        //void setShips(Boat);
+        //void addShip(Boat); ?
+
+        //Methods
+        void placeShips();
+        void takeTurn();
+
+        //void removeShip(); ?
 };
 
 #endif

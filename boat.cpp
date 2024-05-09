@@ -16,7 +16,7 @@ Boat::Boat(const Boat& rhs){
 }
 
 Boat::~Boat(){
-    delete [] boat;
+//    delete [] boat;
 }
 
 int Boat::getBoatFront(){
@@ -34,7 +34,7 @@ void Boat::setBoatBack(int b){
     boatBack = b;
 }
 
-bool isSunk(){
+bool Boat::isSunk(){
     if (boatFront == 0 && boatBack == 0) {
         return true;
     } else {
@@ -42,7 +42,7 @@ bool isSunk(){
     }
 }
 
-Boat& operator =(const Boat& rhs){
+Boat& Boat::operator =(const Boat& rhs){
     boatFront = rhs.boatFront;
     boatBack = rhs.boatBack;
 
