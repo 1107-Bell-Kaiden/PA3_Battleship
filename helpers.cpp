@@ -65,8 +65,21 @@ void displayBoards(Player& player){
     cout << endl;
 }
 
+
+bool checkBoard(int rw, int cl){
+    if (rw >= 0 && rw < 10 && cl >= 0 && cl < 10) {
+        updateBoard(rw, cl);
+        return true;
+    } else {
+        cout << "Invalid ship placement" << endl;
+        return false;
+    }
+
+}
+
 void updateBoard(int rw, int cl){
-    
+    //update board with ship placement
+
 
 
 }
