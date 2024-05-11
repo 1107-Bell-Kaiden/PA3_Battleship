@@ -2,16 +2,16 @@
 #define PLAYER_H
 
 #include "boat.h"
+#include "dynamicArray.h"
 
 class Player {
     protected:
-        string player1_board;
-        string opponent_board;
-        Boat* ships; // Yeah make this dynamically allocated, cuz the ships technically do change.
+        DynamicArray<int>& playerBoard;
+        DynamicArray<int>& opponentBoard;
+        DynamicArray<Boat> ships; // Yeah make this dynamically allocated, cuz the ships technically do change.
+        DynamicArray<int> guesses;
         bool turn;
         string name;
-
-        int numShips, maxShips; // <- Keep here
 
     public:
         Player();
@@ -22,27 +22,18 @@ class Player {
         Player& operator=(const Player&); // <- Using rule of 3, we have to add this aswell
 
         // Getters
-        string getPlayer1_Board(); // I think we change all the boards to ints (2D arrays) instead.
-        string getOpponent_Board();
-        Boat* getShips();
+        DynamicArray<int> getPlayerBoard(); // I think we change all the boards to ints (2D arrays) instead.
+        DynamicArray<int> getOpponentBoard();
+        //DynamicArray<Boat> getShips();
         bool getTurn();
         string getName();
 
         // Setters
-        void setPlayer1_Board(string);
-        void setOpponent_Board(string);
         void setTurn(bool);
         void setName(string);
 
-        void addShip(Boat); // <- Dynamically allocating ships but we never have to add a ship correct?
-
         //Methods
-        void placeShips();
         virtual void takeTurn(); // <- Should then be a virtual function with base implementation
-
-        void removeShip(); // <- Ye add this one aswell
-
-
 };
 
 #endif

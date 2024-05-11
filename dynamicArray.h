@@ -10,7 +10,7 @@ class DynamicArray {
         int maxSize, currentSize;
     public:
         DynamicArray<T>(){
-            maxSize = 10; //arbitrary value
+            maxSize = 5; //arbitrary value
             currentSize = 0;
             array = new T[maxSize];
         }
@@ -68,7 +68,7 @@ class DynamicArray {
         }
 
         void resizeArray(){
-            maxSize += 10; //arbitrary value
+            maxSize += 5; //arbitrary value
             T* temp = new T[maxSize];
             for(int i = 0; i < currentSize; i++){
                 temp[i] = array[i];
@@ -91,6 +91,10 @@ class DynamicArray {
             maxSize = 3;
             array = new T[maxSize];
             //think thats how to do it
+        }
+
+        void removeElement(){
+
         }
 };
 

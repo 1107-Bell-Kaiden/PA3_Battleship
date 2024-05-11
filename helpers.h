@@ -6,12 +6,13 @@
 
 class Helpers {
     public:
-        void startGame();
+        void startGame(Player&, AiPlayer&);
+        void placeShips();
         void playRound();
-        void displayBoards();
-        void updateBoard(string, int, int, char);
+        void displayBoards(Player&);
+        void updateBoard(int, int);
         bool checkHit(string, int, int);
         bool checkGuess(string, int, int);
         bool checkWin();
-}
+};
 #endif

@@ -1,26 +1,21 @@
 #include "player.h"
 
 Player::Player(){
-    numShips = 0;
-    maxShips = 5; // Yeah this is fine
+    playerBoard = new int[100]; // 10x10 Board
+    opponentBoard = new int[100]; // 10x10 Board    
 
-    player1_board = "NONE"; // Fine aswell
-    opponent_board = "NONE"; // ^
-    ships = new Boat[maxShips];
+    ships = new Boat[5];
 
     turn = false;
     name = "NONE";
 }
 
-Player::Player(string pb, string ob, Boat* sh, bool t, string nm, int n, int max){
-    numShips = n;
-    maxShips = max;
+Player::Player(string pb, string ob, Boat* sh, bool t, string nm){
+    playerBoard = pb;
+    opponentBoard = ob;
+    ships = new Boat[5];
 
-    player1_board = pb;
-    opponent_board = ob;
-    ships = new Boat[maxShips];
-
-    for (int i = 0; i < numShips; i++) {
+    for (int i = 0; i < 5; i++) {
         ships[i] = sh[i];
     }
 
@@ -29,14 +24,11 @@ Player::Player(string pb, string ob, Boat* sh, bool t, string nm, int n, int max
 }
 
 Player::Player(const Player& rhs){
-    numShips = rhs.numShips;
-    maxShips = rhs.maxShips;
+    playerBoard = rhs.playerBoard;
+    opponentBoard = rhs.opponentBoard;
+    ships = new Boat[5];
 
-    player1_board = rhs.player1_board;
-    opponent_board = rhs.opponent_board;
-    ships = new Boat[maxShips];
-
-    for (int i = 0; i < numShips; i++) {
+    for (int i = 0; i < 5; i++) {
         ships[i] = rhs.ships[i];
     }
 
@@ -45,18 +37,17 @@ Player::Player(const Player& rhs){
 }
 
 Player::~Player(){
-    delete[] ships;
+    delete[] playerBoard;
+    delete[] opponentBoard;
+
 }
 
 Player& Player::operator=(const Player& rhs){
-    numShips = rhs.numShips;
-    maxShips = rhs.maxShips;
+    playerBoard = rhs.playerBoard;
+    opponentBoard = rhs.opponentBoard;
+    ships = new Boat[5];
 
-    player1_board = rhs.player1_board;
-    opponent_board = rhs.opponent_board;
-    ships = new Boat[maxShips];
-
-    for (int i = 0; i < numShips; i++) {
+    for (int i = 0; i < 5; i++) {
         ships[i] = rhs.ships[i];
     }
 
@@ -66,15 +57,15 @@ Player& Player::operator=(const Player& rhs){
     return *this;
 }
 
-string Player::getPlayer1_Board(){
-    return player1_board;
+DynamicArray<int>& Player::getPlayerBoard(){
+    return playerBoard;
 }
 
-string Player::getOpponent_Board(){
-    return opponent_board;
+DynamicArray<int>& Player::getOpponentBoard(){
+    return opponentBoard;
 }
 
-Boat* Player::getShips(){
+DynamicArray<Boat> Player::getShips(){
     return ships;
 }
 
@@ -84,14 +75,6 @@ bool Player::getTurn(){
 
 string Player::getName(){
     return name;
-}
-
-void Player::setPlayer1_Board(string pb){
-    player1_board = pb;
-}
-
-void Player::setOpponent_Board(string op){
-    opponent_board = op;
 }
 
 void Player::setTurn(bool t){
