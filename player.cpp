@@ -2,9 +2,9 @@
 
 Player::Player(){
     numShips = 0;
-    maxShips = 5; //idk
+    maxShips = 5; // Yeah this is fine
 
-    player1_board = "NONE"; //idk either
+    player1_board = "NONE"; // Fine aswell
     opponent_board = "NONE"; // ^
     ships = new Boat[maxShips];
 

@@ -7,13 +7,11 @@ class Player {
     protected:
         string player1_board;
         string opponent_board;
-        Boat* ships; //would we make this a dynamicArray?
+        Boat* ships; // Yeah make this dynamically allocated, cuz the ships technically do change.
         bool turn;
         string name;
 
-        //idk if we have to dynamically allocate ships or not.
-        int numShips;
-        int maxShips;
+        int numShips, maxShips; // <- Keep here
 
     public:
         Player();
@@ -21,10 +19,10 @@ class Player {
         Player(const Player&);
 
         ~Player();
-        Player& operator=(const Player&);
+        Player& operator=(const Player&); // <- Using rule of 3, we have to add this aswell
 
         // Getters
-        string getPlayer1_Board();
+        string getPlayer1_Board(); // I think we change all the boards to ints (2D arrays) instead.
         string getOpponent_Board();
         Boat* getShips();
         bool getTurn();
@@ -36,14 +34,15 @@ class Player {
         void setTurn(bool);
         void setName(string);
 
-        //void setShips(Boat);
-        //void addShip(Boat); ?
+        void addShip(Boat); // <- Dynamically allocating ships but we never have to add a ship correct?
 
         //Methods
         void placeShips();
-        void takeTurn();
+        virtual void takeTurn(); // <- Should then be a virtual function with base implementation
 
-        //void removeShip(); ?
+        void removeShip(); // <- Ye add this one aswell
+
+
 };
 
 #endif

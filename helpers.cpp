@@ -1,5 +1,4 @@
-#include "aiPlayer.h"
-#include "dynamicArray.h"
+#include "helpers.h"
 
 void startGame(){
 

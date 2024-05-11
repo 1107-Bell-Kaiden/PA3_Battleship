@@ -7,8 +7,13 @@
 
 class AiPlayer : public Player{
     public:
+        AiPlayer();
+        AiPlayer(string, string, Boat*, bool, string, int, int) : Player();
+        AiPlayer(const AiPlayer&):Player();
+
+
         void placeShipsRandom();
-        //void takeTurn(); ?
+        void takeTurn() override; // <- if we use this then we have to override it here no?
 };
 
 #endif
