@@ -7,38 +7,134 @@ void startGame(Player p1, AiPlayer ai){
     cout << "Enter your name: ";
     cin >> name;
     p1.setName(name);
-    
-    displayBoards(ai);
 
     //place ai ships
     ai.placeShipsRandom();
+
     //to place user ships, have them select a beginning and end point for each ship
+    placeShips(p1);
 }
 
-void getShipsInput(){
-    int start, end;
+void placeShips(Player player){
+    char startRow, endRow;
+    int startCol, endCol;
     bool result;
 
     //Carrier
-    cout << "To place your Carrier ship (5 squares), select a starting and ending square for it." << endl;
-    cout << "-(Enter the row first, followed by the column, not separated by a space. For example, if I want to place the start of my ship at row 2 col 3, I would enter '23'.)-" << endl;
+    displayBoards(player);
+    cout << "To place your Carrier (5 squares), select a starting and ending square for it." << endl;
     do{
-        cout << "   Start: ";
-        cin >> start;
-        result = checkBoard()
-    }while();
-    do{
-        cout << "   End: ";
-        //cin end
-    }while();
-    //clear
+        cout << "   Start (row): ";
+        cin >> startRow;
+        cout << "   Start (col): ";
+        cin >> startCol;
+
+        cout << "   End (row): ";
+        cin >> endRow;
+        cout << "   End (col): ";
+        cin >> endCol;
+        
+        result = checkShips(startRow, startCol, endRow, endCol);
+    }while(result == false);
+    initShips(startRow, startCol, endRow, endCol);
+    system("clear");
 
     //Battleship
+    displayBoards(player);
+    cout << "To place your Battleship (4 squares), select a starting and ending square for it." << endl;
+    do{
+        cout << "   Start (row): ";
+        cin >> startRow;
+        cout << "   Start (col): ";
+        cin >> startCol;
 
+        cout << "   End (row): ";
+        cin >> endRow;
+        cout << "   End (col): ";
+        cin >> endCol;
+        
+        result = checkShips(startRow, startCol, endRow, endCol);
+    }while(result == false);
+    initShips(startRow, startCol, endRow, endCol);
+    system("clear");
 
-    
+    //Destroyer
+    displayBoards(player);
+    cout << "To place your Destroyer (3 squares), select a starting and ending square for it." << endl;
+    do{
+        cout << "   Start (row): ";
+        cin >> startRow;
+        cout << "   Start (col): ";
+        cin >> startCol;
+
+        cout << "   End (row): ";
+        cin >> endRow;
+        cout << "   End (col): ";
+        cin >> endCol;
+        
+        result = checkShips(startRow, startCol, endRow, endCol);
+    }while(result == false);
+    initShips(startRow, startCol, endRow, endCol);
+    system("clear");
+
+    //Submarine
+    displayBoards(player);
+    cout << "To place your Submarine (3 squares), select a starting and ending square for it." << endl;
+    do{
+        cout << "   Start (row): ";
+        cin >> startRow;
+        cout << "   Start (col): ";
+        cin >> startCol;
+
+        cout << "   End (row): ";
+        cin >> endRow;
+        cout << "   End (col): ";
+        cin >> endCol;
+        
+        result = checkShips(startRow, startCol, endRow, endCol);
+    }while(result == false);
+    initShips(startRow, startCol, endRow, endCol);
+    system("clear");
+
+    //Patrol Boat
+    displayBoards(player);
+    cout << "To place your Patrol Boat (2 squares), select a starting and ending square for it." << endl;
+    do{
+        cout << "   Start (row): ";
+        cin >> startRow;
+        cout << "   Start (col): ";
+        cin >> startCol;
+
+        cout << "   End (row): ";
+        cin >> endRow;
+        cout << "   End (col): ";
+        cin >> endCol;
+        
+        result = checkShips(startRow, startCol, endRow, endCol);
+    }while(result == false);
+    initShips(startRow, startCol, endRow, endCol);
+    system("clear");
+
 }
 
+//checks the validity of the ship placement
+bool checkShips(char srw, int scl, char erw, int ecl){
+     if (rw >= 0 && rw < 10 && cl >= 0 && cl < 10) {
+        updateBoard(rw, cl);
+        return true;
+    } else {
+        cout << "Invalid ship placement" << endl;
+        return false;
+    }
+
+}
+
+//places the ships after checked in the ships array
+void initShips(char srw, int scl, char erw, int ecl){
+
+}
+
+//gameloop function
 void playRound(){
 
 }
@@ -65,18 +161,7 @@ void displayBoards(Player& player){
     cout << endl;
 }
 
-
-bool checkBoard(int rw, int cl){
-    if (rw >= 0 && rw < 10 && cl >= 0 && cl < 10) {
-        updateBoard(rw, cl);
-        return true;
-    } else {
-        cout << "Invalid ship placement" << endl;
-        return false;
-    }
-
-}
-
+//updates after each square selection for hit or miss
 void updateBoard(int rw, int cl){
     //update board with ship placement
 
@@ -84,14 +169,17 @@ void updateBoard(int rw, int cl){
 
 }
 
+//checks if player hit ship
 bool checkHit(string, int, int){
 
 }
 
+//checks if guess is valid
 bool checkGuess(string, int, int){
 
 }
 
+//checks if win conditions are met
 bool checkWin(){
     
 }

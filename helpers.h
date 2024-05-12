@@ -7,7 +7,9 @@
 class Helpers {
     public:
         void startGame(Player&, AiPlayer&);
-        void placeShips();
+        void placeShips(Player&);
+        bool checkShips(char, int, char, int);
+        void initShips(char, int, char, int);
         void playRound();
         void displayBoards(Player&);
         void updateBoard(int, int);
