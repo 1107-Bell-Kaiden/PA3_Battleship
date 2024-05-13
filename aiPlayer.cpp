@@ -4,6 +4,6 @@ void placeShipsRandom(){
     
 }
 
-void takeTurn() override{
-
+void takeTurn(AiPlayer a){
+    
 }

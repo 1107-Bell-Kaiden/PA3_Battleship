@@ -35,7 +35,7 @@ Player& Player::operator=(const Player& rhs){
     
     turn = rhs.turn;
     name = rhs.name;
-    return *this
+    return *this;
 }
 
 DynamicArray<int>& Player::getPlayerBoard(){
@@ -84,4 +84,30 @@ void Player::setTurn(bool t){
 
 void Player::setName(string nm){
     name = nm;   
+}
+
+void takeTurn(Player p){
+    //will change square to struct when we implement it
+    bool guess, hit, sunk;
+
+    do{
+        displayBoards(p);
+        cout << "Enter the square on your opponent's board you'd like to fire at: ";
+        //get square, implement later
+        //guess = checkGuess();
+    }while(guess == false);
+    //add to guesses array
+
+    //hit = checkHit();
+
+    if(hit == true){
+        cout << "You hit the opponent's " << /*get name of ship <<*/ "! Hopefully it sinks soon." << endl;
+        //check if ship was sunk
+        if(sunk == true){
+            cout << "Congratulations, you sunk the opponent's " << /*get name of ship <<*/ "!! Sucks to be them!" << endl;
+            //show ascii art of firework or something if i wanna be extra? 
+        }
+    }else{
+        cout << "You missed. You aren't very good at this, are you." << endl;
+    }
 }

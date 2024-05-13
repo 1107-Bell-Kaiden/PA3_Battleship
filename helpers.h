@@ -4,13 +4,15 @@
 #include "aiPlayer.h"
 #include "dynamicArray.h"
 
-void startGame(Player&, AiPlayer&);
+#include <time.h>
+#include <stdlib.h>
+
+int startGame(Player&, AiPlayer&);
 void placeShips(Player);
 bool checkShips(char, int, char, int);
 void initShips(char, int, char, int);
-void playRound();
+bool playRound(Player, AiPlayer, int*);
 void displayBoards(Player&);
-void updateBoard(int, int);
 bool checkHit(string, int, int);
 bool checkGuess(string, int, int);
 bool checkWin();

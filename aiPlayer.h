@@ -11,7 +11,7 @@ class AiPlayer : public Player{
 
     public:
         void placeShipsRandom();
-        void takeTurn() override; // <- if we use this then we have to override it here no?
+        void takeTurn(AiPlayer); // have to overload not override becuase of parameters?
 };
 
 #endif

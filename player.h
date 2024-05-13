@@ -3,6 +3,7 @@
 
 #include "boat.h"
 #include "dynamicArray.h"
+#include "helpers.h"
 
 class Player {
     protected:
@@ -38,7 +39,7 @@ class Player {
         void setName(string);
 
         //Methods
-        virtual void takeTurn(); // <- Should then be a virtual function with base implementation
+        virtual void takeTurn(Player); // <- Should then be a virtual function with base implementation
 };
 
 #endif

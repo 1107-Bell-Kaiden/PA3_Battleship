@@ -1,8 +1,9 @@
 #include "helpers.h"
 #include "player.h"
 
-void startGame(Player p1, AiPlayer ai){
+int startGame(Player p1, AiPlayer ai){
     string name;
+    int rand;
 
     cout << "Enter your name: ";
     cin >> name;
@@ -13,6 +14,10 @@ void startGame(Player p1, AiPlayer ai){
 
     //to place user ships, have them select a beginning and end point for each ship
     placeShips(p1);
+
+    //randomly decide who goes first (pick between 1 & 2), implement later
+
+    return rand;
 }
 
 void placeShips(Player player){
@@ -135,8 +140,30 @@ void initShips(char srw, int scl, char erw, int ecl){
 }
 
 //gameloop function
-void playRound(){
-
+bool playRound(Player p, AiPlayer a, int* turn){
+    bool win;
+    switch(*turn){
+        case 1: 
+            p.takeTurn(p);
+            win = checkWin();
+            if(win){
+                return true;
+            }
+            *turn++;
+            break;
+        case 2:
+            a.takeTurn(a);
+            win = checkWin();
+            if(win){
+                return true;
+            }
+            *turn--;
+            break;
+        default:
+            return 0;
+            break;
+    }
+    return false;
 }
 
 void displayBoards(Player& player){
