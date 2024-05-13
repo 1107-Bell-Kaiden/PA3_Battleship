@@ -16,8 +16,11 @@ player.o: boat.h player.h player.cpp
 aiPlayer.o: boat.h player.h aiPlayer.h aiPlayer.cpp
 	g++ -c aiPlayer.cpp
 
-dynamicArray.o: dynamicArray.h dynamicArray.cpp
-	g++ -c dynamicArray.cpp
+dynamicArray.o: dynamicArray.h
+	g++ -c dynamicArray.h
+
+square.o: square.h
+	g++ -c square.h
 
 clean:
 	rm *.o battleship
