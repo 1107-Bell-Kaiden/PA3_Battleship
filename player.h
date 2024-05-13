@@ -1,22 +1,22 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "helpers.h"
 #include "boat.h"
 #include "dynamicArray.h"
-#include "helpers.h"
 
 class Player {
     protected:
         DynamicArray<int> playerBoard;
         DynamicArray<int> opponentBoard;
         DynamicArray<Boat> ships; // Yeah make this dynamically allocated, cuz the ships technically do change.
-        DynamicArray<int> guesses;
+        DynamicArray<Square> guesses;
         bool turn;
         string name;
 
     public:
         Player();
-        Player(DynamicArray<int>, DynamicArray<int>, DynamicArray<Boat>, DynamicArray<int>, bool, string);
+        Player(DynamicArray<int>, DynamicArray<int>, DynamicArray<Boat>, DynamicArray<Square>, bool, string);
         Player(const Player&);
 
         ~Player();
@@ -26,7 +26,7 @@ class Player {
         DynamicArray<int>& getPlayerBoard(); // I think we change all the boards to ints (2D arrays) instead.
         DynamicArray<int>& getOpponentBoard();
         DynamicArray<Boat>& getShips();
-        DynamicArray<int>& getGuesses();
+        DynamicArray<Square>& getGuesses();
         bool getTurn();
         string getName();
 
@@ -34,7 +34,7 @@ class Player {
         void setPlayerBoard(DynamicArray<int>&);
         void setOpponentboard(DynamicArray<int>&);
         void setShips(DynamicArray<Boat>&);
-        void setGuesses(DynamicArray<int>&);
+        void setGuesses(DynamicArray<Square>&);
         void setTurn(bool);
         void setName(string);
 

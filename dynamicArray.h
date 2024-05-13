@@ -78,8 +78,8 @@ class DynamicArray {
         }
 
         T getElement(int ind){
-            if(index <= currentSize){
-                return array[index - 1]; //think it has to be -1
+            if(ind <= currentSize){
+                return array[ind - 1]; //think it has to be -1
             }
             cout << "Error. The element you are trying to access is greater than the current size." << endl;
             //return 0; ?

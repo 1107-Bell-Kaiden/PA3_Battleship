@@ -3,17 +3,14 @@
 
 #include "aiPlayer.h"
 
-#include <time.h>
-#include <stdlib.h>
-
 int startGame(Player&, AiPlayer&);
-void placeShips(Player);
-bool checkShips(char, int, char, int);
-void initShips(char, int, char, int);
-bool playRound(Player, AiPlayer, int*);
+void placeShips(Player&);
+bool checkShips(Square, Square);
+void initShips(Square, Square);
+bool playRound(Player&, AiPlayer&, int&);
 void displayBoards(Player&);
-bool checkHit(string, int, int);
-bool checkGuess(string, int, int);
+bool checkHit(Square);
+bool checkGuess(Square);
 bool checkWin();
 
 #endif

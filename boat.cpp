@@ -1,12 +1,10 @@
 #include "boat.h"
 
-Boat::Boat(){
-    boatFront = 0;
-    boatBack = 0;
+Boat::Boat() : boatFront(), boatBack(){
     name = "NULL";
 }
 
-Boat::Boat(int f, int b, string n){
+Boat::Boat(Square f, Square b, string n){
     boatFront = f;
     boatBack = b;
     name = n;
@@ -20,10 +18,10 @@ Boat::Boat(const Boat& rhs){
 
 Boat::~Boat(){}
 
-int Boat::getBoatFront(){
+Square Boat::getBoatFront(){
     return boatFront;
 }
-int Boat::getBoatBack(){
+Square Boat::getBoatBack(){
     return boatBack;
 }
 
@@ -31,10 +29,10 @@ string Boat::getName(){
     return name;
 }
 
-void Boat::setBoatFront(int f){
+void Boat::setBoatFront(Square f){
     boatFront = f;
 }
-void Boat::setBoatBack(int b){
+void Boat::setBoatBack(Square b){
     boatBack = b;
 }
 
@@ -42,12 +40,9 @@ void Boat::setName(string n){
     name = n;
 }
 
+//have to change this
 bool Boat::isSunk(){
-    if (boatFront == 0 && boatBack == 0) {
-        return true;
-    } else {
-        return false;
-    }
+    //maybe check the ships array, we can set them equal to something when they are hits
 }
 
 Boat& Boat::operator =(const Boat& rhs){

@@ -5,7 +5,7 @@ Player::Player() : playerBoard(), opponentBoard(), ships(), guesses() {
     name = "NONE";
 }
 
-Player::Player(DynamicArray<int> pb, DynamicArray<int> ob, DynamicArray<Boat> sh, DynamicArray<int> g, bool t, string nm) : playerBoard(pb), opponentBoard(ob), ships(sh), guesses(g){
+Player::Player(DynamicArray<int> pb, DynamicArray<int> ob, DynamicArray<Boat> sh, DynamicArray<Square> g, bool t, string nm) : playerBoard(pb), opponentBoard(ob), ships(sh), guesses(g){
     turn = t;
     name = nm;
 }
@@ -50,7 +50,7 @@ DynamicArray<Boat>& Player::getShips(){
     return ships;
 }
 
-DynamicArray<int>& Player::getGuesses(){
+DynamicArray<Square>& Player::getGuesses(){
     return guesses;
 }
 
@@ -74,7 +74,7 @@ void Player::setShips(DynamicArray<Boat>& sh){
     ships = sh;
 }
 
-void Player::setGuesses(DynamicArray<int>& g){
+void Player::setGuesses(DynamicArray<Square>& g){
     guesses = g;
 }
 
@@ -86,7 +86,7 @@ void Player::setName(string nm){
     name = nm;   
 }
 
-void takeTurn(Player p){
+void Player::takeTurn(Player p){
     //will change square to struct when we implement it
     bool guess, hit, sunk;
 

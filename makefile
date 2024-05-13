@@ -1,19 +1,19 @@
 battleship: main.o helpers.o boat.o player.o aiPlayer.o dynamicArray.o square.o
 	g++ -o battleship main.o helpers.o boat.o player.o aiPlayer.o dynamicArray.o square.o
 
-main.o: boat.h player.h aiPlayer.h dynamicArray.h helpers.cpp
+main.o: boat.h player.h aiPlayer.h dynamicArray.h helpers.h
 	g++ -c main.cpp
 
-helpers.o: boat.h player.h aiPlayer.h dynamicArray.h square.h
+helpers.o: boat.h player.h aiPlayer.h dynamicArray.h square.h helpers.h helpers.cpp
 	g++ -c helpers.cpp
 
 boat.o: boat.h boat.cpp square.h
 	g++ -c boat.cpp
 
-player.o: boat.h player.h player.cpp dynamicArray.h square.h
+player.o: boat.h player.h player.cpp dynamicArray.h square.h helpers.h
 	g++ -c player.cpp
 
-aiPlayer.o: boat.h player.h aiPlayer.h aiPlayer.cpp dynamicArray.h square.h
+aiPlayer.o: boat.h player.h aiPlayer.h aiPlayer.cpp dynamicArray.h square.h helper.h
 	g++ -c aiPlayer.cpp
 
 dynamicArray.o: dynamicArray.h
