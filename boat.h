@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+#include "square.h"
+
 //we can't store the front/back as an int anymore, could use struct possibly?
 //not super familiar w them though, not sure where theyd go or how exactly it'd work
 //smth like this:

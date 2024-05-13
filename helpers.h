@@ -2,7 +2,6 @@
 #define HELPERS_H
 
 #include "aiPlayer.h"
-#include "dynamicArray.h"
 
 #include <time.h>
 #include <stdlib.h>
