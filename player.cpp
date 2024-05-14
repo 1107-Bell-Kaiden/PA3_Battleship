@@ -87,7 +87,7 @@ void Player::setName(string nm){
     name = nm;   
 }
 
-void Player::takeTurn(Player p){
+void Player::takeTurn(Player& p){
     //will change square to struct when we implement it
     bool guess, hit, sunk;
 

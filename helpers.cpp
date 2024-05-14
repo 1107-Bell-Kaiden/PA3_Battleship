@@ -1,4 +1,8 @@
 #include "helpers.h"
+#include "player.h"
+#include "aiPlayer.h"
+#include "square.h"
+#include "dynamicArray.h"
 
 int startGame(Player& p, AiPlayer& a){
     string name;
@@ -201,23 +205,32 @@ void displayBoards(Player& p){
     cout << endl;
 }
 
-/* updates after each square selection for hit or miss
-void updateBoard(Square s){
+// updates after each square selection for hit or miss
+void updateBoard(Square s, bool hit, DynamicArray<Square>& board){
     //update board with hit/miss
+    if (hit) {
+        int index = (s.row - 'A') * 10 + (s.col - 1);
+        board.(index, 'H');
+    }
+
 }
 
 //checks if player hit ship
-bool checkHit(Square s){
-
+bool checkHit(Square s, const Player& player){
+    return player.isSquareOccupied(s);
 }
 
 //checks if guess is valid
-bool checkGuess(Square s, DynamicArray<Square> g){ //g for guesses
-
+bool checkGuess(Square s, const DynamicArray<Square>& g){ //g for guesses
+    for (int i = 0; i < g.getCurrentSize(); i++) {
+        if (g.getElement(i) == s) {
+            return false;
+        }
+    }
+    return true;
 }
 
 //checks if win conditions are met
 bool checkWin(){
     
 }
-*/

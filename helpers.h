@@ -1,8 +1,9 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
-#include "player.h"
-#include "aiPlayer.h"
+class Player;
+class AiPlayer;
+class Square;
 
 int startGame(Player&, AiPlayer&);
 bool isValidSquare(const Square&, const Player&);
@@ -11,8 +12,9 @@ bool checkShips(Square, Square, const Player&);
 void initShips(Square, Square, Player&);
 bool playRound(Player&, AiPlayer&, int&);
 void displayBoards(Player&);
-bool checkHit(Square);
-bool checkGuess(Square);
+void updateBoard(Square, bool, DynamicArray<Square>&);
+bool checkHit(Square, const Player&);
+bool checkGuess(Square, DynamicArray<Square>&);
 bool checkWin();
 
 #endif

@@ -45,7 +45,7 @@ class Player {
         void occupuySquare(const Square& s);
 
         virtual void placeShipsRandom();
-        virtual void takeTurn(Player); // <- Should then be a virtual function with base implementation
+        virtual void takeTurn(Player&); // <- Should then be a virtual function with base implementation
 };
 
 #endif

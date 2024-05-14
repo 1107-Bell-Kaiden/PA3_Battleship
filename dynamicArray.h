@@ -1,8 +1,6 @@
 #ifndef DYNAMICARRAY_H
 #define DYNAMICARRAY_H
 
-//#include "boat.h"
-
 template <class T>
 class DynamicArray {
     protected:
@@ -82,7 +80,7 @@ class DynamicArray {
                 return array[ind - 1]; //think it has to be -1
             }
             cout << "Error. The element you are trying to access is greater than the current size." << endl;
-            //return 0; ?
+            return T();
         }
 
         void clearArray(){
