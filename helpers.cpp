@@ -175,7 +175,11 @@ bool playRound(Player& p, AiPlayer& a, int& turn){
 void displayBoards(Player& p){
     DynamicArray<int> playerBoard = p.getPlayerBoard();
     DynamicArray<int> opponent_board = p.getOpponentBoard();
+
+    cout << "Opponent Board: " << endl;
+    cout << "  1 2 3 4 5 6 7 8 9 10" << endl;
     for(int i = 0; i < 10; i++) {
+        cout << (char)('A' + i) << " ";
         for(int j = 0; j < 10; j++) {
             cout << opponent_board.getArray()[i*10 +j];
         }
@@ -185,7 +189,10 @@ void displayBoards(Player& p){
     cout << endl;
     cout << "------------------------" << endl;
 
+    cout << "Player's Board: " << endl;
+    cout << "  1 2 3 4 5 6 7 8 9 10" << endl;
     for(int i = 0; i < 10; i++) {
+        cout << (char)('A' + i) << " ";
         for(int j = 0; j < 10; j++) {
             cout << playerBoard.getArray()[i*10+j];
         }

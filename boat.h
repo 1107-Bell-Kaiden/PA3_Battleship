@@ -1,9 +1,6 @@
 #ifndef BOAT_H
 #define BOAT_H
 
-#include <iostream>
-using namespace std;
-
 #include "square.h"
 
 class Boat {

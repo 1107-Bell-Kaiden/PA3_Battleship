@@ -1,5 +1,4 @@
 #include "aiPlayer.h"
-#include "helpers.h"
 
 void AiPlayer::placeShipsRandom(){
     srand(time(nullptr));
@@ -43,7 +42,7 @@ void AiPlayer::placeShipsRandom(){
 }
 
 /*
-void takeTurn(AiPlayer a){
+void AiPlayer::takeTurn(Player p){
     
 }
 */

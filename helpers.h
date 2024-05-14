@@ -1,6 +1,7 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+#include "player.h"
 #include "aiPlayer.h"
 
 int startGame(Player&, AiPlayer&);
