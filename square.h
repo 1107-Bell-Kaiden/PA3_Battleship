@@ -14,22 +14,17 @@ struct Square{
         row = 'X';
         col = 0;
     }
-    /*
     Square(char r, int c){
         row = r;
         col = c;
     }
 
-    Square(const Square& rhs){
-        row = rhs.row;
-        col = rhs.col;
-    }
-    */
     Square& operator=(const Square& rhs){
         row = rhs.row;
         col = rhs.col;
         return *this;
     }
+
 
     friend ostream& operator<<(ostream& out, const Square& s){
         out << s.row << s.col;
@@ -40,7 +35,6 @@ struct Square{
         in >> s.row >> s.col;
         return in;
     }
-
 };
 
 #endif

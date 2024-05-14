@@ -7,11 +7,11 @@
 
 //in the doc ig we had aiplayer inheriting from player, so it would be super short
 
-class AiPlayer : public Player{
-
+class AiPlayer : public Player {
+    
     public:
-        void placeShipsRandom();
-        void takeTurn(AiPlayer); // have to overload not override becuase of parameters?
+        void placeShipsRandom() override;
+        void takeTurn(AiPlayer) override; // have to overload not override becuase of parameters?
 };
 
 #endif

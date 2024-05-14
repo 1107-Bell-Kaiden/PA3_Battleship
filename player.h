@@ -4,12 +4,13 @@
 #include "helpers.h"
 #include "boat.h"
 #include "dynamicArray.h"
+#include "square.h"
 
 class Player {
     protected:
         DynamicArray<int> playerBoard;
         DynamicArray<int> opponentBoard;
-        DynamicArray<Boat> ships; // Yeah make this dynamically allocated, cuz the ships technically do change.
+        DynamicArray<Boat> ships; 
         DynamicArray<Square> guesses;
         bool turn;
         string name;
@@ -39,6 +40,11 @@ class Player {
         void setName(string);
 
         //Methods
+        bool isSquareOccupied(const Square& s) const;
+        int convertSquaresToIndex(const Square& s) const;
+        void occupuySquare(const Square& s);
+
+        virtual void placeShipsRandom();
         virtual void takeTurn(Player); // <- Should then be a virtual function with base implementation
 };
 

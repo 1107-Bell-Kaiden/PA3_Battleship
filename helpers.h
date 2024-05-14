@@ -4,9 +4,10 @@
 #include "aiPlayer.h"
 
 int startGame(Player&, AiPlayer&);
+bool isValidSquare(const Square&, const Player&);
 void placeShips(Player&);
-bool checkShips(Square, Square);
-void initShips(Square, Square);
+bool checkShips(Square, Square, const Player&);
+void initShips(Square, Square, Player&);
 bool playRound(Player&, AiPlayer&, int&);
 void displayBoards(Player&);
 bool checkHit(Square);

@@ -47,15 +47,15 @@ class DynamicArray {
             return *this;
         }
 
-        int getMaxSize(){
+        int getMaxSize() const{
             return maxSize;
         }
 
-        int getCurrentSize(){
+        int getCurrentSize() const{
             return currentSize;
         }
 
-        T* getArray(){
+        T* getArray() const{
             return array;
         }
 
@@ -77,7 +77,7 @@ class DynamicArray {
             array = temp;
         }
 
-        T getElement(int ind){
+        T getElement(int ind) const{
             if(ind <= currentSize){
                 return array[ind - 1]; //think it has to be -1
             }

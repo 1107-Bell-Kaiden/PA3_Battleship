@@ -34,9 +34,9 @@ void placeShips(Player& p){
         cout << "   End: ";
         cin >> end;
         
-        result = checkShips(start, end);
+        result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end);
+    initShips(start, end, p);
     system("clear");
 
     //Battleship
@@ -49,9 +49,9 @@ void placeShips(Player& p){
         cout << "   End: ";
         cin >> end;
         
-        result = checkShips(start, end);
+        result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end);
+    initShips(start, end, p);
     system("clear");
 
     //Destroyer
@@ -64,9 +64,9 @@ void placeShips(Player& p){
         cout << "   End: ";
         cin >> end;
         
-        result = checkShips(start, end);
+        result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end);
+    initShips(start, end, p);
     system("clear");
 
     //Submarine
@@ -79,9 +79,9 @@ void placeShips(Player& p){
         cout << "   End: ";
         cin >> end;
         
-        result = checkShips(start, end);
+        result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end);
+    initShips(start, end, p);
     system("clear");
 
     //Patrol Boat
@@ -94,27 +94,54 @@ void placeShips(Player& p){
         cout << "   End: ";
         cin >> end;
         
-        result = checkShips(start, end);
+        result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end);
+    initShips(start, end, p);
     system("clear");
 
 }
 
+bool isValidSquare(const Square& square, const Player& player){
+    if(square.row < 'A' || square.row > 'J' || square.col < 1 || square.col > 10) {
+        return false;
+    }
+    return !player.isSquareOccupied(square);
+}
+
 //checks the validity of the ship placement
-bool checkShips(Square s, Square e){ //s = start, e = end
-    /*if (rw >= 0 && rw < 10 && cl >= 0 && cl < 10) {
-        updateBoard(rw, cl);
-        return true;
-    } else {
+bool checkShips(Square s, Square e, const Player& player) {
+    if (s.row == e.row) {  // Horizontal
+        if (e.col < s.col) std::swap(s.col, e.col);
+        // Iterate through columns
+        for (int col = s.col; col <= e.col; ++col) {
+            if (!isValidSquare(Square{s.row, col}, player)) return false;
+        }
+    } else if (s.col == e.col) {  // Vertical
+        if (e.row < s.row) std::swap(s.row, e.row);
+        // Iterate through rows
+        for (char row = s.row; row <= e.row; ++row) {
+            if (!isValidSquare(Square{row, s.col}, player)) return false;
+        }
+    } else {  // Not in a straight line (invalid placement)
         cout << "Invalid ship placement" << endl;
         return false;
-    }*/
-
+    }
+    return true;
 }
 
 //places the ships after checked in the ships array
-void initShips(Square s, Square e){
+void initShips(Square s, Square e, Player& player){
+    if (s.row == e.row) {
+        if (e.col < s.col) swap(s.col, e.col);
+        for (int col = s.col; col <= e.col; ++col) {
+            player.occupuySquare(Square{s.row,col});
+        }
+    } else if (s.col == e.col) {
+        if (e.row < s.row) swap(s.row, e.row);
+        for (char row = s.row; row <= e.row; row++){
+            player.occupuySquare(Square{row, s.col});
+        }
+    }
 
 }
 
@@ -167,10 +194,9 @@ void displayBoards(Player& p){
     cout << endl;
 }
 
-//updates after each square selection for hit or miss
+/* updates after each square selection for hit or miss
 void updateBoard(Square s){
     //update board with hit/miss
-
 }
 
 //checks if player hit ship
@@ -187,3 +213,4 @@ bool checkGuess(Square s, DynamicArray<Square> g){ //g for guesses
 bool checkWin(){
     
 }
+*/

@@ -1,4 +1,5 @@
 #include "player.h"
+#include "helpers.h"
 
 Player::Player() : playerBoard(), opponentBoard(), ships(), guesses() {
     turn = false;
@@ -110,4 +111,18 @@ void Player::takeTurn(Player p){
     }else{
         cout << "You missed. You aren't very good at this, are you." << endl;
     }
+
+}
+
+
+bool Player::isSquareOccupied(const Square& s) const{
+    return playerBoard.getArray()[convertSquaresToIndex(s)] != 0;
+}
+
+int Player::convertSquaresToIndex(const Square& s) const{
+    return (s.row - 'A') * 10 + (s.col - 1);
+}
+
+void Player::occupuySquare(const Square& s){
+    playerBoard.getArray()[convertSquaresToIndex(s)] = 1;
 }
