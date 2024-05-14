@@ -44,7 +44,7 @@ class Player {
         int convertSquaresToIndex(const Square& s) const;
         void occupuySquare(const Square& s);
 
-        virtual void placeShipsRandom();
+        //virtual void placeShipsRandom();
         virtual void takeTurn(Player&); // <- Should then be a virtual function with base implementation
 };
 

@@ -43,6 +43,7 @@ void Boat::setName(string n){
 //have to change this
 bool Boat::isSunk(){
     //maybe check the ships array, we can set them equal to something when they are hits
+    return false; //for compiler
 }
 
 Boat& Boat::operator =(const Boat& rhs){

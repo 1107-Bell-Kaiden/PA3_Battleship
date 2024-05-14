@@ -25,6 +25,12 @@ struct Square{
         return *this;
     }
 
+    bool operator==(const Square& s){
+        if(row == s.row && col == s.col){
+            return true;
+        }
+        return false;
+    }
 
     friend ostream& operator<<(ostream& out, const Square& s){
         out << s.row << s.col;

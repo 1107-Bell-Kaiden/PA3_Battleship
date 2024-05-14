@@ -88,25 +88,25 @@ void Player::setName(string nm){
 }
 
 void Player::takeTurn(Player& p){
-    //will change square to struct when we implement it
+    Square square;
     bool guess, hit, sunk;
 
     do{
         displayBoards(p);
         cout << "Enter the square on your opponent's board you'd like to fire at: ";
-        //get square, implement later
-        //guess = checkGuess();
+        cin >> square;
+        guess = true;//checkGuess(square, guesses);  //check guess causes an error with compiler
     }while(guess == false);
-    //add to guesses array
+    guesses.addItemToArray(square);
 
-    //hit = checkHit();
+    hit = checkHit(square, p);
 
     if(hit == true){
+        //need to find a way to get the name of the ship that was hit
         cout << "You hit the opponent's " << /*get name of ship <<*/ "! Hopefully it sinks soon." << endl;
-        //check if ship was sunk
+        //check if ship is sunk
         if(sunk == true){
             cout << "Congratulations, you sunk the opponent's " << /*get name of ship <<*/ "!! Sucks to be them!" << endl;
-            //show ascii art of firework or something if i wanna be extra? 
         }
     }else{
         cout << "You missed. You aren't very good at this, are you." << endl;

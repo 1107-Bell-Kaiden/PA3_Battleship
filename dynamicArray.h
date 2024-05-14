@@ -1,6 +1,9 @@
 #ifndef DYNAMICARRAY_H
 #define DYNAMICARRAY_H
 
+#include <iostream>
+using namespace std;
+
 template <class T>
 class DynamicArray {
     protected:
@@ -78,6 +81,14 @@ class DynamicArray {
         T getElement(int ind) const{
             if(ind <= currentSize){
                 return array[ind - 1]; //think it has to be -1
+            }
+            cout << "Error. The element you are trying to access is greater than the current size." << endl;
+            return T();
+        }
+
+        void changeElement(int ind, T chng){ //will this work?
+            if(ind <= currentSize){
+                array[ind] = chng;
             }
             cout << "Error. The element you are trying to access is greater than the current size." << endl;
             return T();

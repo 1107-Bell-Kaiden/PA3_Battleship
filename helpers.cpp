@@ -2,7 +2,6 @@
 #include "player.h"
 #include "aiPlayer.h"
 #include "square.h"
-#include "dynamicArray.h"
 
 int startGame(Player& p, AiPlayer& a){
     string name;
@@ -206,11 +205,12 @@ void displayBoards(Player& p){
 }
 
 // updates after each square selection for hit or miss
-void updateBoard(Square s, bool hit, DynamicArray<Square>& board){
+void updateBoard(Square s, bool hit, DynamicArray<Square>& board){ //should the boards be ints or square?
     //update board with hit/miss
     if (hit) {
         int index = (s.row - 'A') * 10 + (s.col - 1);
-        board.(index, 'H');
+        //hit = 1, miss = 2, original square = 0? can change later
+        //board.changeElement(index, '1');
     }
 
 }
@@ -232,5 +232,5 @@ bool checkGuess(Square s, const DynamicArray<Square>& g){ //g for guesses
 
 //checks if win conditions are met
 bool checkWin(){
-    
+    return false; //for compiler
 }

@@ -1,6 +1,8 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+#include "dynamicArray.h"
+
 class Player;
 class AiPlayer;
 class Square;

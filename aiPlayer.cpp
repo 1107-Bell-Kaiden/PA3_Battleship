@@ -41,8 +41,7 @@ void AiPlayer::placeShipsRandom(){
     }
 }
 
-/*
-void AiPlayer::takeTurn(Player p){
-    
+
+void AiPlayer::takeTurn(Player& p){
+    return;
 }
-*/

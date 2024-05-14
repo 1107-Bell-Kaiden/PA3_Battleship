@@ -31,11 +31,13 @@ int main(){
                     //player wins
                     cout << "You have sunk all of your opponent's ships. Maybe you'll get a promotion." << endl << endl;
                     cout << "YOU WIN!!" << endl;
+                    return 0;
                     break;
                 case 2:
                     //ai wins
                     cout << "All of your ships have been sunk. Good luck next time, if you don't drown." << endl << endl;
                     cout << "YOU LOSE!!" << endl;
+                    return 0;
                     break;
                 default:
                     return 0;
