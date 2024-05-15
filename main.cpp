@@ -26,6 +26,7 @@ int main(){
             do{
                 win = playRound(player, ai, turn); //same here
             }while(win == false);
+            
             switch(turn){
                 case 1:
                     //player wins

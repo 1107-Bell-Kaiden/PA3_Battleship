@@ -26,7 +26,12 @@ void placeShips(Player& p){
     Square start;
     Square end;
     bool result;
-    char shipTypes[5] = {1, 2, 3, 4, 5}; //1 = Carrier, 2 = Battleship, 3 = Destroyer, 4 = Submarine, 5 = Patrol Boat
+    DynamicArray<char> shipTypes; 
+    shipTypes.addItemToArray(1); // Carrier
+    shipTypes.addItemToArray(2); // Battleship
+    shipTypes.addItemToArray(3); // Destroyer
+    shipTypes.addItemToArray(4); // Submarine
+    shipTypes.addItemToArray(5); // Patrol Boat
 
     //Carrier
     displayBoards(p);
@@ -40,7 +45,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p, shipTypes[0]);
+    initShips(start, end, p, shipTypes.getElement(0));
     system("clear");
 
     //Battleship
@@ -55,7 +60,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p, shipTypes[1]);
+    initShips(start, end, p, shipTypes.getElement(1));
     system("clear");
 
     //Destroyer
@@ -70,7 +75,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p, shipTypes[2]);
+    initShips(start, end, p, shipTypes.getElement(2));
     system("clear");
 
     //Submarine
@@ -85,7 +90,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p, shipTypes[3]);
+    initShips(start, end, p, shipTypes.getElement(3));
     system("clear");
 
     //Patrol Boat
@@ -100,7 +105,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p, shipTypes[4]);
+    initShips(start, end, p, shipTypes.getElement(4));
     system("clear");
 
 }
