@@ -142,7 +142,7 @@ bool checkShips(Square s, Square e, const Player& player, int shipType) {
     } else if (s.col == e.col) {
         expectedLen = e.row - s.row + 1;
     } else {
-        cout << "Invalid ship placement" << endl;
+        cout << "Invalid ship placement." << endl;
         return false;
     }
 
@@ -165,7 +165,7 @@ bool checkShips(Square s, Square e, const Player& player, int shipType) {
             shipLen = 2;
             break;
         default:
-            cout << "Invalid ship type" << endl;
+            cout << "Invalid ship type." << endl;
             return false;
     }
     if (expectedLen != shipLen) {
@@ -189,7 +189,7 @@ bool checkShips(Square s, Square e, const Player& player, int shipType) {
             if (!isValidSquare(Square{row, s.col}, player)) return false;
         }
     } else {  // Not in a straight line (invalid placement)
-        cout << "Invalid ship placement" << endl;
+        cout << "Invalid ship placement." << endl;
         return false;
     }
 

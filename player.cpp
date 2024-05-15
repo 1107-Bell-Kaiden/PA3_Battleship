@@ -130,7 +130,7 @@ void Player::takeTurn(Player& opponent){
         int shipType = opponent.getPlayerBoard().getArray()[convertSquaresToIndex(square)]; //get the ship type
 
 
-        cout << "You hit the opponent's " << getShipTypeName(shipType) << "! Hopefully it sinks soon." << endl;
+        cout << "You hit the opponent's " << getShipTypeName(shipType) << "! Hopefully it sinks soon!" << endl;
         //check if ship is sunk
         Boat& hitOnBoat = opponent.getBoat(shipType);
         int posOnBoat = opponent.calcPosOnBoat(shipType, square);

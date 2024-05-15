@@ -65,14 +65,14 @@ void AiPlayer::takeTurn(Player& opponent){
     if (hit) {
         markHit(square);
         int shipType = opponent.getPlayerBoard().getArray()[convertSquaresToIndex(square)];
-        cout << "AI hit your " << opponent.getShipTypeName(shipType) << "!" << endl;
+        cout << "The enemy hit your " << opponent.getShipTypeName(shipType) << "! Brace!!" << endl;
         sunk = opponent.getBoat(shipType).isSunk(); // Check if the ship is sunk
 
         if (sunk) {
-            cout << "AI sunk your " << opponent.getShipTypeName(shipType) << "!" << endl;
+            cout << "The enemy sunk your " << opponent.getShipTypeName(shipType) << "!! Hope you can swim!" << endl;
         }
     } else {
         markMiss(square);
-        cout << "Aww, AI missed!" << endl;
+        cout << "Ha, the enemy missed. They must be blind!" << endl;
     }
 }
