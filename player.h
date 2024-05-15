@@ -24,9 +24,10 @@ class Player {
         Player& operator=(const Player&); // <- Using rule of 3, we have to add this aswell
 
         // Getters
-        DynamicArray<int>& getPlayerBoard(); // I think we change all the boards to ints (2D arrays) instead.
+        DynamicArray<int>& getPlayerBoard(); 
         DynamicArray<int>& getOpponentBoard();
-        DynamicArray<Boat>& getShips();
+        Boat& getBoat(int);
+        string getShipTypeName(int);
         DynamicArray<Square>& getGuesses();
         bool getTurn();
         string getName();
@@ -43,6 +44,8 @@ class Player {
         bool isSquareOccupied(const Square& s) const;
         int convertSquaresToIndex(const Square& s) const;
         void occupuySquare(const Square& s, int);
+
+        int calcPosOnBoat(int, const Square&);
 
         void markHit(const Square&);
         void markMiss(const Square&);

@@ -33,7 +33,7 @@ void AiPlayer::placeShipsRandom(){
             } else {
                 end.row += shipSizes.getElement(i) -1;
             }
-            if (checkShips(start, end, *this)) {
+            if (checkShips(start, end, *this, shipTypes.getElement(i))) {
                 initShips(start, end, *this, shipTypes.getElement(i));
                 placed = true;
             }
@@ -42,6 +42,37 @@ void AiPlayer::placeShipsRandom(){
 }
 
 
-void AiPlayer::takeTurn(Player& p){
-    return;
+void AiPlayer::takeTurn(Player& opponent){
+    srand(time(0));
+
+    Square square;
+    bool guess, hit, sunk;
+
+    do {
+        // Random square selection
+        square.row = 'A' + rand() % 10;
+        square.col = 1 + rand() % 10;
+
+        guess = checkGuess(square, guesses);
+    } while (!guess); // Keep guessing until a valid guess is made
+
+    guesses.addItemToArray(square);
+
+    hit = checkHit(square, opponent); // Check if the guess is a hit
+    
+    updateBoard(square, hit, opponentBoard); // Update the board
+
+    if (hit) {
+        markHit(square);
+        int shipType = opponent.getPlayerBoard().getArray()[convertSquaresToIndex(square)];
+        cout << "AI hit your " << opponent.getShipTypeName(shipType) << "!" << endl;
+        sunk = opponent.getBoat(shipType).isSunk(); // Check if the ship is sunk
+
+        if (sunk) {
+            cout << "AI sunk your " << opponent.getShipTypeName(shipType) << "!" << endl;
+        }
+    } else {
+        markMiss(square);
+        cout << "Aww, AI missed!" << endl;
+    }
 }

@@ -1,31 +1,34 @@
 #include "boat.h"
 
-Boat::Boat() : boatFront(), boatBack(){
+Boat::Boat() : boatFront(), boatBack(), hits(){
     name = "NULL";
+    hits.fill(false);
 }
 
-Boat::Boat(Square f, Square b, string n){
+Boat::Boat(Square f, Square b, string n, int len){
     boatFront = f;
     boatBack = b;
     name = n;
+    hits.fill(len);
 }
 
 Boat::Boat(const Boat& rhs){
     boatFront = rhs.boatFront;
     boatBack = rhs.boatBack;
     name = rhs.name;
+    hits = rhs.hits;
 }
 
 Boat::~Boat(){}
 
-Square Boat::getBoatFront(){
+Square Boat::getBoatFront() const{
     return boatFront;
 }
-Square Boat::getBoatBack(){
+Square Boat::getBoatBack() const {
     return boatBack;
 }
 
-string Boat::getName(){
+string Boat::getName() const{
     return name;
 }
 
@@ -42,14 +45,23 @@ void Boat::setName(string n){
 
 //have to change this
 bool Boat::isSunk(){
-    //maybe check the ships array, we can set them equal to something when they are hits
-    return false; //for compiler
+    for (int i = 0; i < hits.getCurrentSize(); i++) {
+        if (!hits.getElement(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+void Boat::hit(int pos) {
+    if (pos >= 0 && pos < hits.getCurrentSize()) {
+        hits.changeElement(pos, true);
+    }
 }
 
 Boat& Boat::operator =(const Boat& rhs){
     boatFront = rhs.boatFront;
     boatBack = rhs.boatBack;
     name = rhs.name;
-
+    hits = rhs.hits;
     return *this;
 }

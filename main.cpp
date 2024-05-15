@@ -21,12 +21,12 @@ int main(){
 
     switch(choice){
         case 1:
-            turn = startGame(player, ai); //this shows up as an error only sometimes not sure whats up with that, could have to do with &
+            turn = startGame(player, ai); // Should always work now
 
             do{
-                win = playRound(player, ai, turn); //same here
+                win = playRound(player, ai, turn); //same here <-- Still issue
             }while(win == false);
-            
+
             switch(turn){
                 case 1:
                     //player wins
