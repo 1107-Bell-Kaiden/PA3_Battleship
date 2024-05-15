@@ -79,19 +79,19 @@ class DynamicArray {
         }
 
         T getElement(int ind) const{
-            if(ind <= currentSize){
-                return array[ind - 1]; //think it has to be -1
+            if(ind < currentSize){
+                return array[ind]; //Doesnt have to be -1 since we're indexing zero based.
             }
             cout << "Error. The element you are trying to access is greater than the current size." << endl;
             return T();
         }
 
-        void changeElement(int ind, T chng){ //will this work?
-            if(ind <= currentSize){
+        void changeElement(int ind, T chng){ //Fixed it
+            if(ind < currentSize){
                 array[ind] = chng;
             }
             cout << "Error. The element you are trying to access is greater than the current size." << endl;
-            return T();
+            return;
         }
 
         void clearArray(){
@@ -105,6 +105,19 @@ class DynamicArray {
         void removeElement(){
 
         }
+
+        void fill(T defaultVal) {
+            if (currentSize < 100) {
+                delete[] array;
+                maxSize = 100;
+                array = new T[maxSize];
+                currentSize = 100;
+            }
+            for(int i = 0; i < currentSize; i++){
+                array[i] = defaultVal;
+            }
+        }
+
 };
 
 #endif

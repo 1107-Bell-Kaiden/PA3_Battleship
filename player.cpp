@@ -4,6 +4,8 @@
 Player::Player() : playerBoard(), opponentBoard(), ships(), guesses() {
     turn = false;
     name = "NONE";
+    playerBoard.fill(0); //fill the board with 0's
+    opponentBoard.fill(0); //fill the opp board with 0's
 }
 
 Player::Player(DynamicArray<int> pb, DynamicArray<int> ob, DynamicArray<Boat> sh, DynamicArray<Square> g, bool t, string nm) : playerBoard(pb), opponentBoard(ob), ships(sh), guesses(g){
@@ -122,7 +124,14 @@ bool Player::isSquareOccupied(const Square& s) const{
 int Player::convertSquaresToIndex(const Square& s) const{
     return (s.row - 'A') * 10 + (s.col - 1);
 }
+void Player::occupuySquare(const Square& s, int shipType){
+    playerBoard.getArray()[convertSquaresToIndex(s)] = shipType;
+}
 
-void Player::occupuySquare(const Square& s){
-    playerBoard.getArray()[convertSquaresToIndex(s)] = 1;
+void Player::markHit(const Square& s){
+    playerBoard.getArray()[convertSquaresToIndex(s)] = 10;  
+}
+
+void Player::markMiss(const Square& s){
+    playerBoard.getArray()[convertSquaresToIndex(s)] = 11;
 }

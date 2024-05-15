@@ -26,6 +26,7 @@ void placeShips(Player& p){
     Square start;
     Square end;
     bool result;
+    char shipTypes[5] = {1, 2, 3, 4, 5}; //1 = Carrier, 2 = Battleship, 3 = Destroyer, 4 = Submarine, 5 = Patrol Boat
 
     //Carrier
     displayBoards(p);
@@ -39,7 +40,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p);
+    initShips(start, end, p, shipTypes[0]);
     system("clear");
 
     //Battleship
@@ -54,7 +55,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p);
+    initShips(start, end, p, shipTypes[1]);
     system("clear");
 
     //Destroyer
@@ -69,7 +70,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p);
+    initShips(start, end, p, shipTypes[2]);
     system("clear");
 
     //Submarine
@@ -84,7 +85,7 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p);
+    initShips(start, end, p, shipTypes[3]);
     system("clear");
 
     //Patrol Boat
@@ -99,9 +100,23 @@ void placeShips(Player& p){
         
         result = checkShips(start, end, p);
     }while(result == false);
-    initShips(start, end, p);
+    initShips(start, end, p, shipTypes[4]);
     system("clear");
 
+}
+
+char displayBoardValue(int val) {
+    switch(val) {
+        case 0: return '~';
+        case 1: return 'C';
+        case 2: return 'B';
+        case 3: return 'D';
+        case 4: return 'S';
+        case 5: return 'P';
+        case 10: return 'X';
+        case 11: return 'M';
+        default: return '?';
+    }
 }
 
 bool isValidSquare(const Square& square, const Player& player){
@@ -133,26 +148,26 @@ bool checkShips(Square s, Square e, const Player& player) {
 }
 
 //places the ships after checked in the ships array
-void initShips(Square s, Square e, Player& player){
+void initShips(Square s, Square e, Player& player, int shipType){
     if (s.row == e.row) {
         if (e.col < s.col) swap(s.col, e.col);
         for (int col = s.col; col <= e.col; ++col) {
-            player.occupuySquare(Square{s.row,col});
+            player.occupuySquare(Square{s.row,col}, shipType);
         }
     } else if (s.col == e.col) {
         if (e.row < s.row) swap(s.row, e.row);
         for (char row = s.row; row <= e.row; row++){
-            player.occupuySquare(Square{row, s.col});
+            player.occupuySquare(Square{row, s.col}, shipType);
         }
     }
-
 }
 
 //gameloop function
 bool playRound(Player& p, AiPlayer& a, int& turn){
     bool win;
     switch(turn){
-        case 1: 
+        case 1:
+            displayBoards(p); 
             p.takeTurn(p);
             win = checkWin();
             if(win){
@@ -161,6 +176,7 @@ bool playRound(Player& p, AiPlayer& a, int& turn){
             turn++;
             break;
         case 2:
+            displayBoards(p);
             a.takeTurn(a);
             win = checkWin();
             if(win){
@@ -184,7 +200,7 @@ void displayBoards(Player& p){
     for(int i = 0; i < 10; i++) {
         cout << (char)('A' + i) << " ";
         for(int j = 0; j < 10; j++) {
-            cout << opponent_board.getArray()[i*10 +j];
+            cout << displayBoardValue(opponent_board.getElement(i*10 +j)) << " ";
         }
         cout << endl;
     }
@@ -197,7 +213,7 @@ void displayBoards(Player& p){
     for(int i = 0; i < 10; i++) {
         cout << (char)('A' + i) << " ";
         for(int j = 0; j < 10; j++) {
-            cout << playerBoard.getArray()[i*10+j];
+            cout << displayBoardValue(playerBoard.getElement(i*10+j)) << " ";
         }
         cout << endl;
     }

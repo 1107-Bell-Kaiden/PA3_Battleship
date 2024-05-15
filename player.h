@@ -42,7 +42,10 @@ class Player {
         //Methods
         bool isSquareOccupied(const Square& s) const;
         int convertSquaresToIndex(const Square& s) const;
-        void occupuySquare(const Square& s);
+        void occupuySquare(const Square& s, int);
+
+        void markHit(const Square&);
+        void markMiss(const Square&);
 
         //virtual void placeShipsRandom();
         virtual void takeTurn(Player&); // <- Should then be a virtual function with base implementation

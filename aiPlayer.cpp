@@ -5,16 +5,16 @@ void AiPlayer::placeShipsRandom(){
     DynamicArray<int> shipSizes;
     shipSizes.addItemToArray(5); // Carrier
     shipSizes.addItemToArray(4); // Battleship
-    shipSizes.addItemToArray(3); // Crusier
+    shipSizes.addItemToArray(3); // Destroyer
     shipSizes.addItemToArray(3); // Submarine
-    shipSizes.addItemToArray(2); // Destroyer
+    shipSizes.addItemToArray(2); // Patrol
 
-    DynamicArray<string> shipNames;
-    shipNames.addItemToArray("Carrier");
-    shipNames.addItemToArray("Battleship");
-    shipNames.addItemToArray("Crusier");
-    shipNames.addItemToArray("Submarine");
-    shipNames.addItemToArray("Destroyer");
+    DynamicArray<int> shipTypes;
+    shipTypes.addItemToArray(1); // Carrier
+    shipTypes.addItemToArray(2); // Battleship
+    shipTypes.addItemToArray(3); // Destroyer
+    shipTypes.addItemToArray(4); // Submarine
+    shipTypes.addItemToArray(5); // Patrol
 
     int numberShips = shipSizes.getCurrentSize();
 
@@ -34,7 +34,7 @@ void AiPlayer::placeShipsRandom(){
                 end.row += shipSizes.getElement(i) -1;
             }
             if (checkShips(start, end, *this)) {
-                initShips(start, end, *this);
+                initShips(start, end, *this, shipTypes.getElement(i));
                 placed = true;
             }
         }
