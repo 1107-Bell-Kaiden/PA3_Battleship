@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include "boat.h"
 #include "player.h"
 #include "aiPlayer.h"
 #include "square.h"
@@ -216,31 +217,20 @@ void initShips(Square s, Square e, Player& player, int shipType){
 
 //gameloop function
 bool playRound(Player& p, AiPlayer& a, int& turn){
-    bool win;
-    switch(turn){
-        case 1:
-            p.takeTurn(a);
-            win = a.checkWin();
-            if(win){
-                cout << p.getName() << " Wins!" << endl;
-
-                return true;
-            }
-
-            turn++;
-            break;
-        case 2:
-            a.takeTurn(p);
-            win = p.checkWin();
-            if(win){
-                cout << "AI Wins!" << endl;
-
-                return true;
-            }
-            turn--;
-            break;
-        default:
-        return false;
+    if (turn == 1) {
+        // Players Turn
+        p.takeTurn(a);
+        if (a.checkWin()) {
+            return true;
+        }
+        turn = 2;
+    } else if (turn == 2) {
+        //AI's turn
+        a.takeTurn(p);
+        if (p.checkWin()){
+            return true;
+        }
+        turn = 1;
     }
     return false;
 }
@@ -315,6 +305,7 @@ bool checkGuess(Square s, const DynamicArray<Square>& g){ //g for guesses
     }
     return true;
 }
+
 
 bool checkWin(const Player &p){
     return p.checkWin();

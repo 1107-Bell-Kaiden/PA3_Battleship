@@ -6,6 +6,7 @@
 class Player;
 class AiPlayer;
 class Square;
+class Boat;
 
 int startGame(Player&, AiPlayer&);
 bool isValidSquare(const Square&, const Player&);

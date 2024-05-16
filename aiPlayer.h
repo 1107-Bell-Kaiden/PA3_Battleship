@@ -10,10 +10,9 @@ class AiPlayer: public Player {
     
     public:
         void placeShipsRandom();
-        void takeTurn(Player& opponent); 
-        bool checkWin() const;
-
+        void takeTurn(Player& opponent);
         DynamicArray<int>& getPlayerBoard();
+        const DynamicArray<int>& getPlayerBoard() const;
 };
 
 #endif

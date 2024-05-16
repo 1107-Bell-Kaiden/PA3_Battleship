@@ -9,11 +9,11 @@ Player::Player() : playerBoard(), opponentBoard(), ships(), guesses() {
     opponentBoard.fill(0); //fill the opp board with 0's
 
     // Intialize Ships:
-    ships.addItemToArray(Boat(Square(), Square(), "Carrier", 5));
-    ships.addItemToArray(Boat(Square(), Square(), "Battleship", 4));
-    ships.addItemToArray(Boat(Square(), Square(), "Destroyer", 3));
-    ships.addItemToArray(Boat(Square(), Square(), "Submarine", 3));
-    ships.addItemToArray(Boat(Square(), Square(), "Patrol Boat", 2));
+    ships.addItemToArray(Boat(Square('A', 1), Square('A', 5), "Carrier", 5));
+    ships.addItemToArray(Boat(Square('B', 1), Square('B', 4), "Battleship", 4));
+    ships.addItemToArray(Boat(Square('C', 1), Square('C', 3), "Destroyer", 3));
+    ships.addItemToArray(Boat(Square('D', 1), Square('D', 3), "Submarine", 3));
+    ships.addItemToArray(Boat(Square('E', 1), Square('E', 2), "Patrol Boat", 2));
 }
 
 Player::Player(DynamicArray<int> pb, DynamicArray<int> ob, DynamicArray<Boat> sh, DynamicArray<Square> g, bool t, string nm) : playerBoard(pb), opponentBoard(ob), ships(sh), guesses(g){
@@ -49,11 +49,15 @@ Player& Player::operator=(const Player& rhs){
     return *this;
 }
 
-DynamicArray<int>& Player::getPlayerBoard(){
+DynamicArray<int>& Player::getPlayerBoard() {
     return playerBoard;
 }
 
-DynamicArray<int>& Player::getOpponentBoard(){
+const DynamicArray<int>& Player::getPlayerBoard() const{
+    return playerBoard;
+}
+
+DynamicArray<int>& Player::getOpponentBoard() {
     return opponentBoard;
 }
 
@@ -129,22 +133,30 @@ void Player::takeTurn(AiPlayer& opponent){
 
     hit = checkHit(square, opponent);
 
+    cout << "Shot at: " << square.row << square.col << (hit ? " hit" : " miss") << endl;
 
     if(hit){
-        markHit(square, opponent.getPlayerBoard());
         //Ship names:
         int shipType = opponent.getPlayerBoard().getArray()[convertSquaresToIndex(square)]; //get the ship type
+        cout << "Detected ship type: " << shipType  << endl;
 
-        cout << "You hit the opponent's " << opponent.getShipTypeName(shipType) << "! Hopefully it sinks soon!" << endl;
-        //check if ship is sunk
-        Boat& hitOnBoat = opponent.getBoat(shipType);
-        int posOnBoat = opponent.calcPosOnBoat(shipType, square);
+        markHit(square, opponent.getPlayerBoard());
 
-        hitOnBoat.hit(posOnBoat);
-        sunk = hitOnBoat.isSunk();
+        if (shipType >= 1 && shipType <= 5) {
+            cout << "You hit the opponent's " << opponent.getShipTypeName(shipType) << "! Hopefully it sinks soon!" << endl;
 
-        if(sunk) {
-            cout << "Congratulations, you sunk the opponent's " << opponent.getShipTypeName(shipType) << "!! Sucks to be them!" << endl;
+            //check if ship is sunk
+            Boat& hitOnBoat = opponent.getBoat(shipType);
+            int posOnBoat = calcPosOnBoat(shipType, square);
+            hitOnBoat.hit(posOnBoat);
+
+
+            if(hitOnBoat.isSunk()){
+                cout << "Congratulations, you sunk the opponent's " << opponent.getShipTypeName(shipType) << "!! Sucks to be them!" << endl;
+            }
+            
+        } else {
+            cout << "Error: Unexpected ship type val" << endl;
         }
 
     } else{
@@ -152,7 +164,7 @@ void Player::takeTurn(AiPlayer& opponent){
         cout << "You missed. You aren't very good at this, are you." << endl;
         cout << endl;
     }
-    updateBoard(square, hit, opponent.getPlayerBoard()); //update the opponent's board
+    updateBoard(square, hit, opponent.getPlayerBoard());
 }
 
 int Player::calcPosOnBoat(int shipType, const Square& square){
@@ -187,9 +199,10 @@ void Player::markMiss(const Square& s, DynamicArray<int>& board){
 
 bool Player::checkWin() const {
     for (int i = 0; i < ships.getCurrentSize(); i++) {
-        if (!ships.getElement(i).isSunk()) {
+        const Boat& boat = ships.getElement(i);
+        if(!boat.isSunk()) {
             return false;
         }
-    }   
+    }
     return true;
 }

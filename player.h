@@ -24,7 +24,9 @@ class Player {
         Player& operator=(const Player&); // <- Using rule of 3, we have to add this aswell
 
         // Getters
-        DynamicArray<int>& getPlayerBoard(); 
+        DynamicArray<int>& getPlayerBoard();
+        const DynamicArray<int>& getPlayerBoard() const;
+         
         DynamicArray<int>& getOpponentBoard();
         Boat& getBoat(int);
         string getShipTypeName(int);

@@ -82,7 +82,7 @@ class DynamicArray {
             if(ind < currentSize){
                 return array[ind]; //Doesnt have to be -1 since we're indexing zero based.
             } else {
-                cout << "Error. The element you are trying to access is greater than the current size." << endl;
+                cout << "Error. The element you are trying to access is greater than the current size: " << currentSize << endl;
             }
             return T();
         }
@@ -91,7 +91,7 @@ class DynamicArray {
             if(ind < currentSize && ind >= 0){
                 array[ind] = chng;
             } else {
-                cout << "Error updating Element. The element you are trying to access is greather than the current size " << endl;
+                cout << "Error updating Element. The element you are trying to access is greater than the current size: " << currentSize << endl;
             }
             return;
         }
