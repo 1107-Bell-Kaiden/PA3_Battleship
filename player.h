@@ -47,11 +47,13 @@ class Player {
 
         int calcPosOnBoat(int, const Square&);
 
-        void markHit(const Square&);
-        void markMiss(const Square&);
+        void markHit(const Square&, DynamicArray<int>&);
+        void markMiss(const Square&, DynamicArray<int>&);
+
+        bool checkWin() const;
 
         //virtual void placeShipsRandom();
-        virtual void takeTurn(Player&); // <- Should then be a virtual function with base implementation
+        virtual void takeTurn(AiPlayer&); // <- Should then be a virtual function with base implementation
 };
 
 #endif

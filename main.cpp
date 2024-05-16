@@ -11,7 +11,7 @@ int main(){
     AiPlayer ai;
     int choice;
     int turn;
-    bool win;
+    bool win = false;
 
     cout << "--BATTLESHIP--" << endl;
     cout << "1. Start Game" << endl;
@@ -21,11 +21,11 @@ int main(){
 
     switch(choice){
         case 1:
-            turn = startGame(player, ai); // Should always work now
+            turn = startGame(player, ai); // Intialize game start. Who goes first, and placing ships.
 
             do{
-                win = playRound(player, ai, turn); //same here <-- Still issue
-            }while(win == false);
+                win = playRound(player, ai, turn);
+            }while(!win);
 
             switch(turn){
                 case 1:

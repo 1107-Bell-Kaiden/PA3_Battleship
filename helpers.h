@@ -14,10 +14,11 @@ char displayBoardValue(int);
 bool checkShips(Square, Square, const Player&, int);
 void initShips(Square, Square, Player&, int);
 bool playRound(Player&, AiPlayer&, int&);
-void displayBoards(Player&);
+void displayPlayerBoard(Player&);
+void displayOpponentBoard(AiPlayer&);
 void updateBoard(Square, bool, DynamicArray<int>&);
 bool checkHit(Square, const Player&);
 bool checkGuess(Square, const DynamicArray<Square>&);
-bool checkWin();
+bool checkWin(const Player &p);
 
 #endif

@@ -10,7 +10,10 @@ class AiPlayer: public Player {
     
     public:
         void placeShipsRandom();
-        void takeTurn(Player& opponent) override; // have to overload not override becuase of parameters?
+        void takeTurn(Player& opponent); 
+        bool checkWin() const;
+
+        DynamicArray<int>& getPlayerBoard();
 };
 
 #endif

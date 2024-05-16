@@ -1,4 +1,5 @@
 #include "player.h"
+#include "aiPlayer.h"
 #include "helpers.h"
 
 Player::Player() : playerBoard(), opponentBoard(), ships(), guesses() {
@@ -108,29 +109,33 @@ void Player::setName(string nm){
     name = nm;   
 }
 
-void Player::takeTurn(Player& opponent){
+void Player::takeTurn(AiPlayer& opponent){
     Square square;
     bool guess, hit, sunk;
 
     do{
-        displayBoards(opponent);
+        displayPlayerBoard(*this); // Display Own Board
+        cout << "--------------------" << endl;
+        displayOpponentBoard(opponent); // Display Opponents board
+
         cout << "Enter the square on your opponent's board you'd like to fire at: ";
         cin >> square;
         guess = checkGuess(square, guesses); //check if guess if valid
+        cout << endl;
+
     } while(!guess);
 
     guesses.addItemToArray(square);
 
     hit = checkHit(square, opponent);
 
-    updateBoard(square, hit, opponentBoard); //update the opponent's board
+
     if(hit){
-        markHit(square); 
+        markHit(square, opponent.getPlayerBoard());
         //Ship names:
         int shipType = opponent.getPlayerBoard().getArray()[convertSquaresToIndex(square)]; //get the ship type
 
-
-        cout << "You hit the opponent's " << getShipTypeName(shipType) << "! Hopefully it sinks soon!" << endl;
+        cout << "You hit the opponent's " << opponent.getShipTypeName(shipType) << "! Hopefully it sinks soon!" << endl;
         //check if ship is sunk
         Boat& hitOnBoat = opponent.getBoat(shipType);
         int posOnBoat = opponent.calcPosOnBoat(shipType, square);
@@ -139,13 +144,15 @@ void Player::takeTurn(Player& opponent){
         sunk = hitOnBoat.isSunk();
 
         if(sunk) {
-            cout << "Congratulations, you sunk the opponent's " << getShipTypeName(shipType) << "!! Sucks to be them!" << endl;
+            cout << "Congratulations, you sunk the opponent's " << opponent.getShipTypeName(shipType) << "!! Sucks to be them!" << endl;
         }
 
     } else{
-        markMiss(square);
+        markMiss(square, opponent.getPlayerBoard());
         cout << "You missed. You aren't very good at this, are you." << endl;
+        cout << endl;
     }
+    updateBoard(square, hit, opponent.getPlayerBoard()); //update the opponent's board
 }
 
 int Player::calcPosOnBoat(int shipType, const Square& square){
@@ -170,10 +177,19 @@ void Player::occupuySquare(const Square& s, int shipType){
     playerBoard.getArray()[convertSquaresToIndex(s)] = shipType;
 }
 
-void Player::markHit(const Square& s){
-    playerBoard.getArray()[convertSquaresToIndex(s)] = 10;  
+void Player::markHit(const Square& s, DynamicArray<int>& board){
+    board.getArray()[convertSquaresToIndex(s)] = 10;  
 }
 
-void Player::markMiss(const Square& s){
-    playerBoard.getArray()[convertSquaresToIndex(s)] = 11;
+void Player::markMiss(const Square& s, DynamicArray<int>& board){
+    board.getArray()[convertSquaresToIndex(s)] = 11;
+}
+
+bool Player::checkWin() const {
+    for (int i = 0; i < ships.getCurrentSize(); i++) {
+        if (!ships.getElement(i).isSunk()) {
+            return false;
+        }
+    }   
+    return true;
 }

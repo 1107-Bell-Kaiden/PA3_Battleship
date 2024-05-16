@@ -21,8 +21,8 @@ void AiPlayer::placeShipsRandom(){
     for(int i = 0; i < numberShips; i++) {
         bool placed = false;
         while (!placed) {
-            int startRow = rand() % 10 + 'A';
-            int startCol = rand() % 10 + 1;
+            int startRow = 'A' + rand() % 10;
+            int startCol = 1 + rand() % 10;
             bool horizontal = rand() % 2 == 0;
 
             Square start(startRow, startCol);
@@ -53,17 +53,16 @@ void AiPlayer::takeTurn(Player& opponent){
         square.row = 'A' + rand() % 10;
         square.col = 1 + rand() % 10;
 
+        // Check to make sure guess is valid
         guess = checkGuess(square, guesses);
-    } while (!guess); // Keep guessing until a valid guess is made
+    } while (!guess); 
 
     guesses.addItemToArray(square);
 
     hit = checkHit(square, opponent); // Check if the guess is a hit
-    
-    updateBoard(square, hit, opponentBoard); // Update the board
 
     if (hit) {
-        markHit(square);
+        markHit(square, opponent.getPlayerBoard());
         int shipType = opponent.getPlayerBoard().getArray()[convertSquaresToIndex(square)];
         cout << "The enemy hit your " << opponent.getShipTypeName(shipType) << "! Brace!!" << endl;
         sunk = opponent.getBoat(shipType).isSunk(); // Check if the ship is sunk
@@ -72,7 +71,17 @@ void AiPlayer::takeTurn(Player& opponent){
             cout << "The enemy sunk your " << opponent.getShipTypeName(shipType) << "!! Hope you can swim!" << endl;
         }
     } else {
-        markMiss(square);
+        markMiss(square, opponent.getPlayerBoard());
         cout << "Ha, the enemy missed. They must be blind!" << endl;
+        cout << endl;
     }
+
+    updateBoard(square, hit, opponent.getPlayerBoard()); // Update the board
+}
+
+DynamicArray<int>& AiPlayer::getPlayerBoard(){
+    return playerBoard;
+}
+bool AiPlayer::checkWin() const{
+    return Player::checkWin();
 }

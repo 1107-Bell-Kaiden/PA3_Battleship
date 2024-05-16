@@ -13,6 +13,7 @@ int startGame(Player& p, AiPlayer& a){
 
     //place ai ships
     a.placeShipsRandom();
+    p.setOpponentboard(a.getPlayerBoard());
 
     //to place user ships, have them select a beginning and end point for each ship
     placeShips(p);
@@ -35,7 +36,7 @@ void placeShips(Player& p){
     shipTypes.addItemToArray(5); // Patrol Boat
 
     //Carrier
-    displayBoards(p);
+    displayPlayerBoard(p);
     cout << "To place your Carrier (5 squares), select a starting and ending square for it." << endl;
     do{
         cout << "   Start: ";
@@ -50,7 +51,7 @@ void placeShips(Player& p){
     system("clear");
 
     //Battleship
-    displayBoards(p);
+    displayPlayerBoard(p);
     cout << "To place your Battleship (4 squares), select a starting and ending square for it." << endl;
     do{
         cout << "   Start: ";
@@ -65,7 +66,7 @@ void placeShips(Player& p){
     system("clear");
 
     //Destroyer
-    displayBoards(p);
+    displayPlayerBoard(p);
     cout << "To place your Destroyer (3 squares), select a starting and ending square for it." << endl;
     do{
         cout << "   Start: ";
@@ -80,7 +81,7 @@ void placeShips(Player& p){
     system("clear");
 
     //Submarine
-    displayBoards(p);
+    displayPlayerBoard(p);
     cout << "To place your Submarine (3 squares), select a starting and ending square for it." << endl;
     do{
         cout << "   Start: ";
@@ -95,7 +96,7 @@ void placeShips(Player& p){
     system("clear");
 
     //Patrol Boat
-    displayBoards(p);
+    displayPlayerBoard(p);
     cout << "To place your Patrol Boat (2 squares), select a starting and ending square for it." << endl;
     do{
         cout << "   Start: ";
@@ -218,44 +219,34 @@ bool playRound(Player& p, AiPlayer& a, int& turn){
     bool win;
     switch(turn){
         case 1:
-            p.takeTurn(p);
-            win = checkWin();
+            p.takeTurn(a);
+            win = a.checkWin();
             if(win){
+                cout << p.getName() << " Wins!" << endl;
+
                 return true;
             }
+
             turn++;
             break;
         case 2:
-            a.takeTurn(a);
-            win = checkWin();
+            a.takeTurn(p);
+            win = p.checkWin();
             if(win){
+                cout << "AI Wins!" << endl;
+
                 return true;
             }
             turn--;
             break;
         default:
-            return 0;
-            break;
+        return false;
     }
     return false;
 }
 
-void displayBoards(Player& p){
+void displayPlayerBoard(Player& p){
     DynamicArray<int> playerBoard = p.getPlayerBoard();
-    DynamicArray<int> opponent_board = p.getOpponentBoard();
-
-    cout << "Opponent Board: " << endl;
-    cout << "  1 2 3 4 5 6 7 8 9 10" << endl;
-    for(int i = 0; i < 10; i++) {
-        cout << (char)('A' + i) << " ";
-        for(int j = 0; j < 10; j++) {
-            cout << displayBoardValue(opponent_board.getElement(i*10 +j)) << " ";
-        }
-        cout << endl;
-    }
-    
-    cout << endl;
-    cout << "------------------------" << endl;
 
     cout << "Player's Board: " << endl;
     cout << "  1 2 3 4 5 6 7 8 9 10" << endl;
@@ -269,14 +260,37 @@ void displayBoards(Player& p){
     cout << endl;
 }
 
+void displayOpponentBoard(AiPlayer& p) {
+    DynamicArray<int>& opponent_board = p.getPlayerBoard();
+
+    cout << "Opponent Board: " << endl;
+    cout << "  1 2 3 4 5 6 7 8 9 10" << endl;
+    for(int i = 0; i < 10; i++) {
+        cout << (char)('A' + i) << " ";
+        for(int j = 0; j < 10; j++) {
+            int val = opponent_board.getElement(10 * i+ j);
+            if (val == 10 || val == 11) {
+                cout << displayBoardValue(val) << " ";
+            } else {
+                cout << "~ ";
+            }
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
 // updates after each square selection for hit or miss
-void updateBoard(Square s, bool hit, DynamicArray<int>& board){ // keep all boards as ints for now
+void updateBoard(Square s, bool hit, DynamicArray<int>& board){
     //update board with hit/miss
     int index = (s.row - 'A') * 10 + (s.col - 1);
-    if (hit) {
-        board.changeElement(index, 10);
-    } else {
-        board.changeElement(index, 11);
+
+    if (index >= 0 && index < board.getCurrentSize()) {
+        if (hit) {
+            board.changeElement(index, 10);
+        } else {
+            board.changeElement(index, 11);
+    }
     }
 }
 
@@ -287,15 +301,21 @@ bool checkHit(Square s, const Player& player){
 
 //checks if guess is valid
 bool checkGuess(Square s, const DynamicArray<Square>& g){ //g for guesses
+    if (s.row < 'A' || s.row > 'J' || s.col < 1 || s.col >  10) {
+        cout << "Invalid guess." << endl;
+        return false;
+    }
+
+
     for (int i = 0; i < g.getCurrentSize(); i++) {
         if (g.getElement(i) == s) {
+            cout << "Invalid Guess." << endl;
             return false;
         }
     }
     return true;
 }
 
-//checks if win conditions are met
-bool checkWin(){
-    return false; //for compiler
+bool checkWin(const Player &p){
+    return p.checkWin();
 }
